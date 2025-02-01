@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Import Module & Declare Variable
 var createError = require('http-errors');
 var express = require('express');
@@ -26,12 +28,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Handle Error
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -44,12 +46,9 @@ app.use(function(err, req, res, next) {
 // Set port
 const port = process.env.APP_PORT || 4000;
 
-
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-let name = "algi";
 
 module.exports = app;
